@@ -3,11 +3,21 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+#include <windows.h>
 
 using namespace std;
-
          int dana = 0;
+
+         void sleep_for_seconds(float seconds) {
+    #ifdef _WIN32
+    Sleep(static_cast<DWORD>(seconds * 1000));
+#else
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(seconds * 1000)));
+#endif
+}
+
       float spins(int &dana , float res){
+        while(true){
           int price = 50;
          
          if(dana < price){
@@ -38,18 +48,31 @@ using namespace std;
         }
 
          
-
         int b = 0;
         int h = 0;
          //program spin
          int random = rand() % (50 - 0 + 1) + 0;
          h = random;
-         cout << "kamu mendapat" << hadiah[random] << endl;
+         for(int i = 0;i < 3 ;i++){
+            cout << hadiah[rand() % (50 - 0 + 1) + 0] << endl;
+            float tm = 0.5;
+            sleep_for_seconds(tm);
+            tm += 0.5;
+         }
+         sleep_for_seconds(2);
+         cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
+         int my;
+         cout << "apakah mau lanjut? y[1]/n[0]" << endl;
+         cin >> my;
+         if(my == 0){
+            break;
+         }
       }
-
+      }
       float spins1(int &dana , float res){
+        while(true){
           int price = 100;
          if(dana < price){
             cout << "saldo tidak cukup" << endl;
@@ -82,12 +105,26 @@ using namespace std;
          //program spin
          int random = rand() % (50 - 0 + 1) + 0;
          h = random;
-         cout << "kamu mendapat" << hadiah[random] << endl;
+         for(int i = 0;i < 3 ;i++){
+            cout << hadiah[rand() % (50 - 0 + 1) + 0] << endl;
+            float tm = 0.5;
+            sleep_for_seconds(tm);
+            tm += 0.5;
+         }
+         sleep_for_seconds(2);
+         cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
+          int my;
+         cout << "apakah mau lanjut? y[1]/n[0]" << endl;
+         cin >> my;
+         if(my == 0){
+            break;
       }
-
+        }
+      }
   float spins2(int &dana , float res){
+    while(true){
           int price = 500;
          if(dana < price){
                dana += price;
@@ -120,12 +157,27 @@ using namespace std;
          //program spin
          int random = rand() % (50 - 0 + 1) + 0;
          h = random;
-         cout << "kamu mendapat" << hadiah[random] << endl;
+         for(int i = 0;i < 3 ;i++){
+            cout << hadiah[rand() % (50 - 0 + 1) + 0] << endl;
+            float tm = 0.5;
+            sleep_for_seconds(tm);
+            tm += 0.5;
+         }
+         sleep_for_seconds(2);
+
+         cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
+          int my;
+         cout << "apakah mau lanjut? y[1]/n[0]" << endl;
+         cin >> my;
+         if(my == 0){
+            break;
       }
-
+  }
+  }
       float spins3(int &dana , float res){
+        while(true){
          int price = 1000;
          if(dana < price){
             cout << "saldo tidak cukup" << endl;
@@ -159,12 +211,24 @@ using namespace std;
          //program spin
          int random = rand() % (50 - 0 + 1) + 0;
          h = random;
-         cout << "kamu mendapat" << hadiah[random] << endl;
+         for(int i = 0;i < 3 ;i++){
+            cout << hadiah[rand() % (50 - 0 + 1) + 0] << endl;
+            float tm = 0.5;
+            sleep_for_seconds(tm);
+            tm += 0.5;
+         }
+         sleep_for_seconds(2);
+         cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
+          int my;
+         cout << "apakah mau lanjut? y[1]/n[0]" << endl;
+         cin >> my;
+         if(my == 0){
+            break;
       }
-
-
+      }
+      }
 int main(){
    cout << "SLOT BY DJAYIEM" << endl;
     cout << "[top]untuk top up" << endl;
@@ -225,3 +289,4 @@ while(true){
 }
 return 0;
 }
+  
