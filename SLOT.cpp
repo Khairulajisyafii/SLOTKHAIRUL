@@ -4,10 +4,15 @@
 #include <thread>
 #include <chrono>
 #include <windows.h>
-
+//g++ yes.cpp -o yes.exe
 using namespace std;
-         int dana = 0;
-
+         int dana = 400;
+         int coin = 0;
+         int kekayaan[5] = {0,0,0,0,0};
+         int code[4] = {6767,9097,8897,6678};
+         int reedem;
+         string nkekayaan[5] ={"motor","mobil","helikopter","rumah","hotel"};
+         int hshoprice[5] = {20000,300000,12500000,40000000,652000000};
          void sleep_for_seconds(float seconds) {
     #ifdef _WIN32
     Sleep(static_cast<DWORD>(seconds * 1000));
@@ -15,11 +20,41 @@ using namespace std;
     std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(seconds * 1000)));
 #endif
 }
-
+   int shops(int &dana,int sugih[5],int hshoprice[5],string name[5]){
+      int choice = 0;
+      int amount = 0;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+      cout << " uang : Rp" << dana << endl;
+      cout << " motor      [0]        Rp" << hshoprice[0] << "/unit" << endl;
+      cout << " mobil      [1]        Rp" << hshoprice[1] << "/unit" << endl;
+      cout << " helikopter [2]        Rp" << hshoprice[2] << "/unit" << endl;
+      cout << " rumah      [3]        Rp" << hshoprice[3] << "/unit" << endl;
+      cout << " hotel      [4]        Rp" << hshoprice[4] << "/unit" << endl;
+      cout << " batal      [5]" << endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+      while(true){
+      cout << "pilih aset yang mau dibeli" << endl;
+      cin >> choice;
+         if(choice >= 5){
+            cout << "transaksi batal" << endl;
+            return 1;
+            }
+             cout << "ingin membeli brp?" << endl;
+             cin >> amount;
+            if(dana < hshoprice[choice]*amount){
+             cout << "uang tidak cukup" << endl;
+            }else{
+            dana -= hshoprice[choice]*amount;
+            cout << "telah membeli " << name[choice] << " sebanyak " << amount << endl;
+            int *iya = &sugih[choice];
+            iya[choice] += amount;
+            }
+      }
+      }
+   
       float spins(int &dana , float res){
         while(true){
           int price = 50;
-         
          if(dana < price){
             cout << "saldo tidak cukup" << endl;
             dana += price;
@@ -63,7 +98,7 @@ using namespace std;
          cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
-         int my;
+         int my = 1;
          cout << "apakah mau lanjut? y[1]/n[0]" << endl;
          cin >> my;
          if(my == 0){
@@ -115,7 +150,7 @@ using namespace std;
          cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
-          int my;
+          int my = 1;
          cout << "apakah mau lanjut? y[1]/n[0]" << endl;
          cin >> my;
          if(my == 0){
@@ -123,7 +158,7 @@ using namespace std;
       }
         }
       }
-  float spins2(int &dana , float res){
+      float spins2(int &dana , float res){
     while(true){
           int price = 500;
          if(dana < price){
@@ -168,10 +203,11 @@ using namespace std;
          cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
-          int my;
+          int my = 1;
          cout << "apakah mau lanjut? y[1]/n[0]" << endl;
          cin >> my;
          if(my == 0){
+            cout << "permainan telah berakhir" << endl;
             break;
       }
   }
@@ -221,7 +257,7 @@ using namespace std;
          cout << "kamu mendapat : " << hadiah[random] << endl;
          int resz = hadiah[random];
          dana += resz;
-          int my;
+          int my = 1;
          cout << "apakah mau lanjut? y[1]/n[0]" << endl;
          cin >> my;
          if(my == 0){
@@ -230,44 +266,83 @@ using namespace std;
       }
       }
 int main(){
-   cout << "SLOT BY DJAYIEM" << endl;
-    cout << "[top]untuk top up" << endl;
-         cout << "[cek]untuk cek saldo" << endl;
+         cout << "SLOT BY KHAIRUL" << endl;
+         cout << "[top]untuk top up" << endl;
+         cout << "[aset]untuk cek aset" << endl;
          cout << "[play]untuk bermain" << endl;
-         cout << "[prize]untuk cek list hadiah" << endl;
+         cout << "[shop]untuk membeli aset" << endl;
+         cout << "[code]untuk penukaran kode" << endl;
          cout << "[stop]untuk keluar dari program" << endl;
-       
+       string inp;
 while(true){
-      string inp;
-      int spin,up,bet,profit;
+      int spin,up,bet,profit,cv;
      cin >> inp;
     
 
-       if(inp == "cek"){
-         cout << "sisa saldo kamu Rp" << dana << endl;
+       if(inp == "aset"){
+         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+         cout << "  uang         : Rp " << dana << endl;
+         cout << "  coin         : " << coin << endl;
+         cout << "  motor        : " <<  kekayaan[0] <<  " unit" << endl;
+         cout << "  mobil        : " << kekayaan[1] <<   " unit" << endl;
+         cout << "  helikopter   : "<< kekayaan[2] <<    " unit" << endl;
+         cout << "  rumah        : "<< kekayaan[3] <<    " unit" << endl;
+         cout << "  hotel        : "<< kekayaan[4] <<    " unit" << endl;
+         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
        }else if(inp =="top"){
-         cout << "pilih beberapa opsi top up" << endl;
+         cout << "pilih beberapa opsi top up(membutuhkan 1 coin)" << endl;
+         if(coin <= 0){
+            cout << "oops coinmu tidak cukup" << endl;
+         }else{
          cout << "[1]Rp20  [2]Rp50  [3]Rp100  [4]Rp200 [5]batal" << endl;
          cin >> up ;
          if(up == 1){
-            dana += 20;
+            cout << "top up brp kali[maks 10]?" << endl;
+            cin >> cv;
+            if(cv > 10){
+               cv = 10;
+            }else if(cv < 0){
+               cv = 0;
+            }
+            dana += 20*cv;
             cout << "top up berhasil!" << endl;
          }else if(up == 2){
-            dana += 50;
+            cout << "top up brp kali[maks 10]?" << endl;
+            cin >> cv;
+            if(cv > 10){
+               cv = 10;
+            }else if(cv < 0){
+               cv = 0;
+            }
+            dana += 50*cv;
             cout << "top up berhasil!" << endl;
          }else if(up == 3){
-            dana += 100;
+            cout << "top up brp kali[maks 10]?" << endl;
+            cin >> cv;
+            if(cv > 10){
+               cv = 10;
+            }else if(cv < 0){
+               cv = 0;
+            }
+            dana += 100*cv;
             cout << "top up berhasil!" << endl;
          }else if(up == 4){
-            dana += 200;
+            cout << "top up brp kali[maks 10]?" << endl;
+            cin >> cv;
+            if(cv > 10){
+               cv = 10;
+            }else if(cv < 0){
+               cv = 0;
+            }
+            dana += 200*cv;
             cout << "top up berhasil!" << endl;
-         }else if(up == 5){
+         }else{
             cout << "top up gagal!" << endl;
-
+         }
          }}else if(inp =="play"){
          cout << "pilih bet" << endl;
-         cout << "[1]50  [2]100 [3]500 [5]1000" << endl;
+         cout << "[1]50  [2]100 [3]500 [4]1000" << endl;
          cin >> bet;
          if(bet == 1){
             spins(dana,0);
@@ -282,11 +357,27 @@ while(true){
          }
          }else if(inp == "stop"){
             break;
+         }else if(inp == "shop"){
+             shops(dana,kekayaan,hshoprice,nkekayaan);
+         }else if(inp == "code"){
+              cout << "masukkan kode reedem" << endl;
+              cin >> reedem;
+              int succes = 0;
+              for(int g = 0;g < 5;g++){
+               if(reedem == code[g]){
+                  cout << "code berhasil! +1 coin" << endl;
+                  coin += 1;
+                  succes += 1;
+               }
+              }
+              if(succes <= 0){
+               cout <<"code salah" << endl;
+              }
          }else{
           cout << "tolong masukkan dengan benar!!" << endl;
+         }
     }
   
-}
 return 0;
 }
   
