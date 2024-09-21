@@ -4,6 +4,7 @@
 #include <thread>
 #include <chrono>
 #include <windows.h>
+//1 2 5 10
 //g++ yes.cpp -o yes.exe
 using namespace std;
          int dana = 400;
@@ -187,7 +188,6 @@ using namespace std;
         for(int i = 49; i < 50 ; i++){
             hadiah[i] = 100000*5;
         }
-           int b = 0;
         int h = 0;
          //program spin
          int random = rand() % (50 - 0 + 1) + 0;
